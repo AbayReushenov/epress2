@@ -13,7 +13,7 @@ const options = {
   // family: 4 // Use IPv4, skip trying IPv6
 };
 
-const dbURL = 'mongodb://localhost:27017/w2d2repeatauth25012021';
+const dbURL = 'mongodb://localhost:27017/Authentification26012021';
 function dbConnect() {
   mongoose.connect(dbURL, options, (error) => {
     if (error) return console.log(error);

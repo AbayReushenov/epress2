@@ -1,10 +1,11 @@
 const createError = require('http-errors');
 const express = require('express');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+// const MongoStore = require('connect-mongo')(session);
+const FileStore = require('session-file-store')(session);
 const logger = require('morgan');
 const token = require('./data/token');
 const dbConnect = require('./data/database');
@@ -28,9 +29,8 @@ app.use(session({
   name: 'sid',
   secret: token,
   resave: false,
-  store: new MongoStore({
-    mongooseConnection: mongoose.connection,
-    collection: 'sessionMongo',
+  store: new FileStore({
+    secret: token,
   }),
   saveUninitialized: false, // предотвратит хранение пустых объектов сеанса в хранилище сеансов.
   cookie: {
